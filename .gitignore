@@ -1,4 +1,50 @@
-.DS_Store
-Thumbs.db
+# Python and local environments
 __pycache__/
 *.py[cod]
+*.so
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+build/
+dist/
+
+# Tests and tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local inputs, model weights, and generated output
+/data/
+/models/
+/results/
+/output/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.png
+*.log
+*_viz/
+*_focus.txt
+
+# Credentials and workstation files
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Research artifacts are kept off this release branch
+/paper/
+*.sbatch
