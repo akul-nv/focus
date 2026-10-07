@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f2">
+  <meta name="description" content="FOCUS is a training-free framework that uses closed-loop attention feedback to understand streaming video with fewer vision-language model calls. COLM 2026, NVIDIA.">
+  <meta property="og:title" content="FOCUS — Closed-Loop Attention Feedback">
+  <meta property="og:description" content="Look when it matters. Focus on what matters. Understand streaming video with fewer VLM calls.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://akul-nv.github.io/focus/assets/convergence.png">
+  <meta property="og:url" content="https://akul-nv.github.io/focus/">
+  <title>FOCUS · Efficient Vision-Language Understanding · COLM 2026</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#overview" aria-label="FOCUS home"><span class="focus-mark" aria-hidden="true"><i></i></span>FOCUS<span class="wordmark-divider"></span><span class="wordmark-note">COLM 2026</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">＋</span></button>
+      <nav id="main-nav" aria-label="Main navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#in-practice">In practice</a>
+        <a href="#citation">Citation</a>
+        <a class="nav-repo" href="https://github.com/akul-nv/focus" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" id="overview" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> A COLM 2026 RESEARCH PROJECT</div>
+        <h1 id="hero-title">FOCUS<span class="title-dot">.</span></h1>
+        <p class="paper-title">Closed-Loop Attention Feedback for Efficient Vision-Language Understanding</p>
+        <p class="hero-description">Look when it matters. Focus on what matters.<br>A training-free framework that understands streaming video with fewer vision-language model calls.</p>
+        <div class="authors"><a href="mailto:akuls@nvidia.com">Akul Santhosh</a><span aria-hidden="true">·</span><a href="mailto:aasthaj@nvidia.com">Aastha Jhunjhunwala</a></div>
+        <div class="affiliation"><span class="nvidia-square" aria-hidden="true"></span>NVIDIA</div>
+        <div class="hero-actions">
+          <a class="button button-dark" href="assets/focus-paper.pdf" target="_blank" rel="noopener">Read the paper <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+          <a class="button button-outline" href="assets/focus-poster.pdf" target="_blank" rel="noopener">View poster <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </div>
+        <a class="code-status" href="https://github.com/akul-nv/focus" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 19"/></svg>Research code coming soon <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="explorer" aria-labelledby="explorer-title">
+          <div class="explorer-top"><span id="explorer-title"><span class="small-cross" aria-hidden="true">＋</span> INSIDE THE FEEDBACK LOOP</span><span class="live-tag">FIG. 02</span></div>
+          <div class="scene-view">
+            <svg id="scene-image" class="scene-image" viewBox="852 33 240 179" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="scene-title"><title id="scene-title">Burst 3: original frame from the robotic teleoperation sequence</title><image href="assets/convergence.png" width="2530" height="752"/></svg>
+            <svg id="map-image" class="map-image" viewBox="852 574 240 178" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title"><title id="map-title">Burst 3: combined spatial focus prior</title><image href="assets/convergence.png" width="2530" height="752"/></svg>
+            <div class="scene-label"><span class="status-dot"></span><span id="scene-label-text">ROBOTIC TELEOPERATION</span></div>
+            <span class="burst-overlay">BURST <span id="burst-number">03</span> / 09</span>
+            <span class="scene-corner top-left" aria-hidden="true"></span><span class="scene-corner bottom-right" aria-hidden="true"></span>
+          </div>
+          <div class="explorer-controls">
+            <div class="view-switch" role="group" aria-label="Visualization layer">
+              <button type="button" data-layer="frame" aria-pressed="false">Scene</button>
+              <button type="button" data-layer="attention" aria-pressed="false">Attention</button>
+              <button type="button" data-layer="combined" aria-pressed="true">Focus map</button>
+            </div>
+            <button class="play-button" type="button" id="play-bursts" aria-label="Play burst sequence" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z"/></svg></button>
+          </div>
+          <div class="burst-control"><label for="burst-slider">EXPLORE BURSTS</label><input id="burst-slider" type="range" min="0" max="9" step="1" value="3" aria-valuetext="Burst 3 of 9"><output id="burst-output" for="burst-slider">03</output></div>
+          <p class="explorer-caption" id="explorer-caption">Attention from the previous response meets new visual change.</p>
+        </div>
+        <div class="visual-footnote"><span class="mini-loop" aria-hidden="true">↳</span> Observe. Understand. Refocus. <span>Actual figure data from the paper.</span></div>
+      </div>
+    </section>
+
+    <section class="metrics container" aria-label="Research highlights">
+      <div class="metric"><span class="metric-value">74.8<span>%</span></span><div><h2>EgoSchema accuracy</h2><p>74.6% with uniform sampling</p></div></div>
+      <div class="metric"><span class="metric-value">54<span>%</span><span class="metric-arrow" aria-hidden="true">↓</span></span><div><h2>Fewer VLM calls</h2><p>25.4 vs. 55 per EgoSchema clip</p></div></div>
+      <div class="metric"><span class="metric-value">0</span><div><h2>Training steps</h2><p>No fine-tuning. No learned parameters.</p></div></div>
+    </section>
+
+    <section class="idea-section section-pad" aria-labelledby="idea-title">
+      <div class="container idea-layout">
+        <div><p class="eyebrow section-index">01 / THE IDEA</p><h2 id="idea-title">Not every frame<br>needs a <span class="serif-word">second look.</span></h2></div>
+        <div class="idea-copy"><p>A minute of video at 30 fps contains 1,800 frames. Calling a vision-language model on a fixed schedule spends compute on quiet moments as well as meaningful events.</p><p>FOCUS makes observation adaptive. It detects semantic change, captures a short burst, and uses the model’s own decoder attention to guide spatial focus in the next burst. The video arrives as a stream; future frames are never required.</p><div class="principle"><span aria-hidden="true">↳</span><p>The central idea: close the loop between <strong>what the model sees</strong> and <strong>what it understands.</strong></p></div></div>
+      </div>
+    </section>
+
+    <section class="method-section container section-pad" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><div><p class="eyebrow section-index">02 / THE METHOD</p><h2 id="method-title">Three layers. One feedback loop.</h2></div><p>Decide when to look, where to focus,<br>and what to carry forward.</p></div>
+      <div class="pipeline" aria-label="The three stages of FOCUS">
+        <article class="pipeline-step">
+          <div class="step-top"><span class="step-number">01</span><span class="step-category">TEMPORAL GATING</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></div>
+          <div class="gate-graphic" aria-hidden="true"><div class="gate-track"><i></i><i></i><i></i><i class="selected"></i><i class="selected"></i><i class="selected"></i><i></i><i></i><i></i><i class="selected"></i><i class="selected"></i><i class="selected"></i><i></i><i></i></div><span class="gate-bracket">meaningful change → capture a burst</span></div>
+          <h3>Look when it matters.</h3><p>A lightweight vision encoder measures patch-level semantic change. Capture 32 frames when change crosses a threshold, or a safety timeout is reached.</p><span class="step-detail">PATCH EMBEDDINGS → BURST CAPTURE</span>
+        </article>
+        <article class="pipeline-step">
+          <div class="step-top"><span class="step-number">02</span><span class="step-category">SPATIAL CALIBRATION</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></div>
+          <div class="spatial-graphic" aria-hidden="true"><div class="patch-grid" id="change-grid"></div><span>×</span><div class="patch-grid" id="attention-grid"></div><span>→</span><div class="patch-grid" id="focus-grid"></div></div>
+          <h3>Focus on what matters.</h3><p>Fuse visual change with the previous attention map. Amplify relevant vision-token values and suppress off-target ones in the decoder cache, keeping every token.</p><span class="step-detail">CHANGE × ATTENTION → SPATIAL PRIOR</span>
+        </article>
+        <article class="pipeline-step">
+          <div class="step-top"><span class="step-number">03</span><span class="step-category">ATTENTION FEEDBACK</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></div>
+          <div class="feedback-graphic" aria-hidden="true"><span class="model-block">VLM</span><span class="feedback-flow">→</span><div class="response-lines"><i></i><i></i><i></i></div><span class="feedback-return">↶</span></div>
+          <h3>Let understanding guide the next look.</h3><p>After generation, extract text-to-vision attention from the last four decoder layers. Retain it as the spatial prior for the next burst, without updating model weights.</p><span class="step-detail">DECODER ATTENTION → NEXT BURST</span>
+        </article>
+      </div>
+      <div class="feedback-rail"><span aria-hidden="true">↑</span><div></div><p>Understanding from burst <i>n</i> shapes spatial focus in burst <i>n + 1</i></p><div></div><span aria-hidden="true">↵</span></div>
+      <details class="technical-details"><summary>The implementation, a little closer <span aria-hidden="true">＋</span></summary><div class="details-grid"><p><strong>Two compatible models.</strong> The Qwen2-VL-2B-Instruct vision encoder handles gating; Qwen3-VL-8B-Instruct generates responses. They share a model family, not weights.</p><p><strong>A spatial intervention.</strong> Calibration scales value-cache entries during decoding. It leaves keys and queries untouched and removes no tokens. The first burst runs without calibration to establish context.</p><p><strong>One fixed configuration.</strong> The reported experiments use τ = 0.4, 32-frame bursts, amplification α = 1.05, suppression β = 0.04, greedy decoding, and a 100-token cap.</p></div></details>
+    </section>
+
+    <section class="results-section section-pad" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow section-index">03 / THE EVIDENCE</p><h2 id="results-title">Comparable quality.<br><span class="serif-word">A smaller call budget.</span></h2></div><div class="benchmark-tabs" role="tablist" aria-label="Benchmark"><button type="button" id="tab-egoschema" role="tab" aria-selected="true" aria-controls="panel-egoschema" data-benchmark="egoschema">EgoSchema</button><button type="button" id="tab-captioning" role="tab" aria-selected="false" aria-controls="panel-captioning" tabindex="-1" data-benchmark="captioning">Video captioning</button></div></div>
+        <div class="results-layout">
+          <div class="chart-card"><div class="chart-heading"><h3 id="chart-heading">Accuracy vs. model calls</h3><span class="chart-direction" id="chart-direction">↖ HIGHER ACCURACY, FEWER CALLS</span></div><svg id="results-chart" viewBox="0 0 640 360" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">EgoSchema accuracy and VLM calls</title><desc id="chart-description">FOCUS with feedback: 74.8% accuracy at 25.4 calls. Uniform: 74.6% at 55 calls. BOLT: 74.2% at 55 calls. Gating only: 73.6% at 25.4 calls. DyCoke: 71.4% at 12 calls. Exact values are also in the results table.</desc></svg><div class="chart-legend"><span><i class="legend-dot focus-dot"></i>FOCUS with feedback</span><span><i class="legend-dot gating-dot"></i>Gating only</span><span><i class="legend-dot baseline-dot"></i>Baselines</span></div><noscript><p class="noscript-chart">Exact benchmark results are available in the table alongside this chart.</p></noscript></div>
+          <div class="benchmark-panel" id="panel-egoschema" role="tabpanel" aria-labelledby="tab-egoschema" tabindex="0">
+            <div class="result-callout"><span>54<span>%</span><span class="callout-arrow" aria-hidden="true">↓</span></span><p>fewer calls than uniform sampling,<br>with comparable accuracy.</p></div>
+            <div class="table-scroll"><table><caption class="sr-only">EgoSchema results on the 500-video subset</caption><thead><tr><th scope="col">Method</th><th scope="col">Accuracy</th><th scope="col">Calls / clip</th></tr></thead><tbody><tr><th scope="row">Uniform sampling</th><td>74.6%</td><td>55</td></tr><tr><th scope="row">BOLT <span class="table-note">streaming</span></th><td>74.2%</td><td>55</td></tr><tr><th scope="row">DyCoke <span class="table-note">streaming</span></th><td>71.4%</td><td>12</td></tr><tr><th scope="row">FOCUS <span class="table-note">gating only</span></th><td>73.6%</td><td>25.4</td></tr><tr class="focus-row"><th scope="row">FOCUS <span class="table-note">with feedback</span></th><td>74.8%</td><td>25.4</td></tr></tbody></table></div>
+            <p class="benchmark-note">500 three-minute videos · 5-way multiple choice · 5-run means. All methods use Qwen3-VL-8B with matched 3.3 s cadence and prompting in the streaming setting.</p>
+          </div>
+          <div class="benchmark-panel" id="panel-captioning" role="tabpanel" aria-labelledby="tab-captioning" tabindex="0" hidden>
+            <div class="result-callout"><span>57<span>%</span><span class="callout-arrow" aria-hidden="true">↓</span></span><p>fewer calls than uniform sampling,<br>at comparable captioning quality.</p></div>
+            <div class="table-scroll"><table><caption class="sr-only">Captioning results on 25 egocentric videos</caption><thead><tr><th scope="col">Method</th><th scope="col">Quality / 5</th><th scope="col">Total calls</th></tr></thead><tbody><tr><th scope="row">Uniform sampling</th><td>3.81</td><td>516</td></tr><tr><th scope="row">BOLT</th><td>3.91</td><td>263</td></tr><tr><th scope="row">DyCoke</th><td>3.81</td><td>263</td></tr><tr><th scope="row">FOCUS <span class="table-note">gating only</span></th><td>3.89</td><td>222</td></tr><tr class="focus-row"><th scope="row">FOCUS <span class="table-note">with feedback</span></th><td>3.92</td><td>222</td></tr></tbody></table></div>
+            <p class="benchmark-note">25 videos · GPT-5.2 quality ratings (1–5) · shared Qwen3-VL-8B backbone. Decoding settings differ across methods. FOCUS vs. BOLT quality: paired Wilcoxon p = .895.</p>
+          </div>
+        </div>
+        <div class="results-context"><span class="context-mark" aria-hidden="true">i</span><p id="results-context">The result is efficiency at comparable accuracy, not an accuracy win. Gating determines the call budget; feedback steers spatial focus. Both FOCUS variants make the same number of calls.</p></div>
+        <details class="technical-details cost-details"><summary>What counts as compute? <span aria-hidden="true">＋</span></summary><div class="details-grid"><p><strong>Calls and runtime are different.</strong> Call counts measure VLM invocations. Every arriving frame still passes through the gating encoder, at a reported cost of about 34 ms per frame.</p><p><strong>VLM-only vs. end-to-end.</strong> On captioning, FOCUS has a VLM compute ratio of 0.59. Including the gating encoder, the serialized end-to-end ratio is 1.36. These ratios are inference seconds divided by video duration.</p><p><strong>Limits of the evidence.</strong> Captioning is a small, LLM-judged study. Subtle events can fall below the gating threshold, and encoder cost can become the throughput bottleneck. See the paper for the full protocol and limitations.</p></div></details>
+      </div>
+    </section>
+
+    <section class="practice-section container section-pad" id="in-practice" aria-labelledby="practice-title">
+      <div class="section-heading"><div><p class="eyebrow section-index">04 / IN PRACTICE</p><h2 id="practice-title">The difference is in the details.</h2></div><p>Same selected bursts.<br>A more grounded description.</p></div>
+      <figure class="example-figure"><div class="example-topline"><span>EPIC-KITCHENS / PREPARING SOUP</span><span>15-SECOND CLIP · 2 BURSTS</span></div><img src="assets/soup-frames.png" width="1932" height="360" loading="lazy" alt="Three egocentric frames show a person lifting a saucepan lid, stirring soup, and placing the lid over the pot on the right."><figcaption>Qualitative example from the paper. Both FOCUS variants observe the same bursts; feedback changes how the action is grounded.</figcaption></figure>
+      <div class="caption-comparison"><div class="caption-card"><p class="caption-label"><span class="legend-dot baseline-dot"></span> GATING ONLY</p><blockquote>“…placed the metal lid onto the <mark class="error-mark">right-hand burner</mark> … covering the <mark class="error-mark">empty pot</mark>.”</blockquote></div><div class="caption-card caption-card-focus"><p class="caption-label"><span class="legend-dot focus-dot"></span> WITH ATTENTION FEEDBACK</p><blockquote>“…placed the metal lid onto the <mark>pot on the right side</mark> … <mark>covering it</mark>.”</blockquote></div></div>
+      <p class="example-note">Excerpts from the second burst. Attention carried over from the previous observation helps maintain focus on the pot as the action unfolds.</p>
+      <div class="full-figure"><div><h3>Watch the spatial prior evolve.</h3><p>Across ten bursts, visual change and decoder attention combine to guide the next observation.</p></div><a class="text-link" href="assets/convergence.png" target="_blank" rel="noopener">Explore the full figure <span aria-hidden="true">↗</span></a><a class="convergence-link" href="assets/convergence.png" target="_blank" rel="noopener" aria-label="Open full-size spatial prior evolution figure"><img src="assets/convergence.png" width="2530" height="752" loading="lazy" alt="Spatial prior evolution over bursts 0 to 9. Four rows show original robotic teleoperation frames, patch dissimilarity, decoder attention, and combined focus maps. Burst 0 has no combined prior."></a></div>
+    </section>
+
+    <section class="citation-section section-pad" id="citation" aria-labelledby="citation-title"><div class="container citation-layout"><div><p class="eyebrow section-index">05 / BUILD ON THIS WORK</p><h2 id="citation-title">A reference for<br>your next <span class="serif-word">idea.</span></h2><p>If you find FOCUS useful in your research,<br>please consider citing our paper.</p><a class="text-link" href="https://github.com/akul-nv/focus" target="_blank" rel="noopener noreferrer">Follow the code release on GitHub <span aria-hidden="true">↗</span></a></div><div class="citation-card"><div class="citation-top"><span>BIBTEX</span><button type="button" id="copy-citation" aria-describedby="copy-status"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg><span>Copy citation</span></button></div><pre><code id="bibtex">@inproceedings{santhosh2026focus,
+  title = {{FOCUS}: Closed-Loop Attention Feedback
+           for Efficient Vision-Language Understanding},
+  author = {Santhosh, Akul and
+            Jhunjhunwala, Aastha},
+  booktitle = {Conference on Language Modeling},
+  year = {2026},
+  url = {https://github.com/akul-nv/focus}
+}</code></pre><p id="copy-status" role="status" aria-live="polite"></p></div></div></section>
+  </main>
+
+  <footer class="container site-footer"><a class="wordmark" href="#overview"><span class="focus-mark" aria-hidden="true"><i></i></span>FOCUS</a><p>Akul Santhosh &amp; Aastha Jhunjhunwala <span>·</span> NVIDIA <span>·</span> COLM 2026</p><a href="#overview" class="back-top">Back to top <span aria-hidden="true">↑</span></a></footer>
+</body>
+</html>
